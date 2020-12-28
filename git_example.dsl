@@ -17,11 +17,12 @@ job('git_example') {
     }
 
     parameters {
-        gitParameter('TAG') {
-            name('first')
+        gitParameter{
+            name('git-parameter-plugin')
             description('tags')
             type('TAG')
             branch('master')
+            useRepository('first')
         }
 
     }
