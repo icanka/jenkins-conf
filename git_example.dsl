@@ -35,5 +35,19 @@ job('git_example') {
             listSize('0')
         }
 
+        gitParameter{
+            type('PT_TAG')
+            name('warnings-ng-plugin')
+            description('tags')
+            branch('')
+            useRepository('warnings-ng-plugin')
+            defaultValue('')
+            branchFilter('')
+            tagFilter('')
+            sortMode('DESCENDING_SMART')
+            selectedValue('NONE')
+            quickFilterEnabled(false)
+            listSize('0')
+        }
     }
 }
