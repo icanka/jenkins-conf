@@ -21,7 +21,7 @@ job('git_example') {
              gitTool('default')
              browser{
                  gitWeb{
-                     repoUrl('')
+                     repoUrl('https://github.com/jenkinsci/git-parameter-plugin.git')
                  }
              }
         }
