@@ -9,8 +9,10 @@ job('git_example') {
     scm{
         gitScm{
             userRemoteConfigs{
-                url('https://github.com/jenkinsci/git-parameter-plugin.git')
-                name('first')
+                userRemoteConfig{
+                    url('https://github.com/jenkinsci/git-parameter-plugin.git')
+                    name('first')
+                }
             }
         }
     }
