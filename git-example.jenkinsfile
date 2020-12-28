@@ -1,26 +1,10 @@
-def stringsToEcho = ["github-demo"]
-
-// The map we'll store the parallel steps in before executing them.
-def stepsForParallel = stringsToEcho.collectEntries {
-    ["echoing ${it}" : transformIntoStep(it)]
-}
-
-// Actually run the steps in parallel - parallel takes a map as an argument,
-// hence the above.
-node{
-    stage('BUILD'){
-        parallel stepsForParallel
-    }
-}
-
-
-// Take the string and echo it.
-def transformIntoStep(jobName) {
-    // We need to wrap what we return in a Groovy closure, or else it's invoked
-    // when this method is called, not when we pass it to parallel.
-    // To do this, you need to wrap the code below in { }, and either return
-    // that explicitly, or use { -> } syntax.
-    return {
-        build jobName
-    }
+node {
+    checkout([$class: 'GitSCM', 
+                          branches: [[name: "${params.TAG}"]], 
+                          doGenerateSubmoduleConfigurations: false, 
+                          extensions: [], 
+                          gitTool: 'Default', 
+                          submoduleCfg: [], 
+                          userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']]
+                        ])
 }
