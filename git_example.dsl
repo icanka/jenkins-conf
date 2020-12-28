@@ -1,10 +1,10 @@
-pipelineJob('git_example') {
-    definition {
-        cps {
-            script(readFileFromWorkspace('git_example.jenkinsfile'))
-            sandbox()
-        }
-    }
+job('git_example') {
+    // definition {
+    //     cps {
+    //         script(readFileFromWorkspace('git_example.jenkinsfile'))
+    //         sandbox()
+    //     }
+    // }
 
     parameters {
         gitParam('TAG') {
