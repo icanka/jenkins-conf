@@ -21,9 +21,9 @@ job('git_example') {
     }
     parameters {
         gitParameter{
+            type('REVISION')
             name('git-parameter-plugin')
             description('tags')
-            type('REVISION')
             branch('master')
             useRepository('git-parameter-plugin')
             defaultValue('')
