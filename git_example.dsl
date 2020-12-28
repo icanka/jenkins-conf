@@ -17,6 +17,14 @@ job('git_example') {
 
                 }
             }
+             doGenerateSubmoduleConfigurations(false)
+             gitTool('default')
+             browser{
+                 gitlab{
+                     repoUrl('')
+                     version('')
+                 }
+             }
         }
     }
 
