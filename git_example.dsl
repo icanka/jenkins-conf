@@ -28,7 +28,7 @@ job('git_example') {
             tagFilter('')
             sortMode('DESCENDING_SMART')
             selectedValue('NONE')
-            quickFilterEnabled('')
+            quickFilterEnabled(false)
         }
 
     }
