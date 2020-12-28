@@ -21,17 +21,17 @@ job('git_example') {
     }
     parameters {
         gitParameter{
-            type('REVISION')
+            type('PT_TAG')
             name('git-parameter-plugin')
             description('tags')
-            branch('master')
+            branch('')
             useRepository('git-parameter-plugin')
             defaultValue('')
             branchFilter('')
             tagFilter('')
             sortMode('DESCENDING_SMART')
             selectedValue('NONE')
-            quickFilterEnabled(true)
+            quickFilterEnabled(false)
         }
 
     }
