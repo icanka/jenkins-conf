@@ -1,4 +1,4 @@
-pipelineJob('git-example') {
+pipelineJob('git_example') {
     definition {
         cps {
             script(readFileFromWorkspace('git-example.jenkinsfile'))

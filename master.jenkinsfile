@@ -1,4 +1,4 @@
-def jobs = ['git-example']
+def jobs = ['git_example']
 
 // The map we'll store the parallel steps in before executing them.
 LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->

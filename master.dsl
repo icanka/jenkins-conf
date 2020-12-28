@@ -1,4 +1,4 @@
-def jobs = ['git-example']
+def jobs = ['git_example']
 
 for (jobName in jobs){
     fileName = jobName + ".seedjob"
