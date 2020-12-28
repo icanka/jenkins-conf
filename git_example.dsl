@@ -1,7 +1,7 @@
 pipelineJob('git_example') {
     definition {
         cps {
-            script(readFileFromWorkspace('git-example.jenkinsfile'))
+            script(readFileFromWorkspace('git_example.jenkinsfile'))
             sandbox()
         }
     }
