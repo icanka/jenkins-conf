@@ -14,6 +14,14 @@ node{
         jobDsl targets: 'master.dsl'
     }
 
+    stage('Auth generated seedjobs'){
+        for(job in jobs){
+            jobName = job + "_SEEDJOB"
+            filePath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
+            echo "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth admin:bc5dfb61da234126b4d7ee447b8ff44c update-job ${jobName} < config.xml"
+        }
+    }
+
     stage('Run generated seedjobs'){
         parallel stepsForParallel
     }
