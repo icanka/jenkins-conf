@@ -7,23 +7,12 @@ job('git_example') {
     // }
 
     scm{
-        gitSCM{
-            userRemoteConfigs{
-                userRemoteConfig{
-                    url('https://github.com/jenkinsci/git-parameter-plugin.git')
-                    name('first')
-                    refspec('')
-                    credentialsId('')
-
-                }
+        git{
+            remote{
+                name('first')
+                url('https://github.com/jenkinsci/git-parameter-plugin.git')
             }
-             doGenerateSubmoduleConfigurations(false)
-             gitTool('default')
-             browser{
-                 gitWeb{
-                     repoUrl('https://github.com/jenkinsci/git-parameter-plugin.git')
-                 }
-             }
+            
         }
     }
 
