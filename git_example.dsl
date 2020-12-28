@@ -12,6 +12,9 @@ job('git_example') {
                 userRemoteConfig{
                     url('https://github.com/jenkinsci/git-parameter-plugin.git')
                     name('first')
+                    refspec('')
+                    credentialsId('')
+
                 }
             }
         }
