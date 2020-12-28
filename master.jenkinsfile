@@ -1,8 +1,30 @@
+def jobs = ['git-example']
+
+// The map we'll store the parallel steps in before executing them.
+def stepsForParallel = jobs.collectEntries {
+    ["echoing ${it}" : transformIntoStep(it)]
+}
+
 node{
-    stage('checkout from version control'){
+    stage('checkout from version control') {
         checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'c3e7e893-b87b-4194-a7cf-0f54fb5c56fa', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'git@gitlab_server:raflman/jenkins-conf.git']]])
     }
     stage('process job dsl'){
         jobDsl targets: 'master.dsl'
+    }
+
+    stage('Run generated seedjobs'){
+        parallel stepsForParallel
+    }
+}
+
+// Take the string and echo it.
+def transformIntoStep(jobName) {
+    // We need to wrap what we return in a Groovy closure, or else it's invoked
+    // when this method is called, not when we pass it to parallel.
+    // To do this, you need to wrap the code below in { }, and either return
+    // that explicitly, or use { -> } syntax.
+    return {
+        build jobName
     }
 }
