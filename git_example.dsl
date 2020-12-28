@@ -32,6 +32,7 @@ job('git_example') {
             sortMode('DESCENDING_SMART')
             selectedValue('NONE')
             quickFilterEnabled(false)
+            listSize('0')
         }
 
     }
