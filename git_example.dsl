@@ -23,6 +23,12 @@ job('git_example') {
             type('TAG')
             branch('master')
             useRepository('first')
+            defaultValue('')
+            branchFilter('')
+            tagFilter('')
+            sortMode('')
+            selectedValue('')
+            quickFilterEnabled('')
         }
 
     }
