@@ -7,7 +7,7 @@ job('git_example') {
     // }
 
     scm{
-        gitScm{
+        gitSCM{
             userRemoteConfigs{
                 userRemoteConfig{
                     url('https://github.com/jenkinsci/git-parameter-plugin.git')
