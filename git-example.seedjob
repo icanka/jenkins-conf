@@ -1,0 +1,7 @@
+jobName = 'git-example'
+
+node{
+    stage('Process job dsl'){
+        jobDsl targets: 'git-example.dsl'
+    }
+}
