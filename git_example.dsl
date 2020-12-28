@@ -17,7 +17,8 @@ job('git_example') {
     }
 
     parameters {
-        gitParam('TAG') {
+        gitParameter('TAG') {
+            name('first')
             description('tags')
             type('TAG')
             branch('master')
