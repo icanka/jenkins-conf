@@ -9,8 +9,12 @@ job('git_example') {
     scm{
         git{
             remote{
-                name('first')
+                name('git-parameter-plugin')
                 url('https://github.com/jenkinsci/git-parameter-plugin.git')
+            }
+            remote{
+                name('warnings-ng-plugin')
+                url('https://github.com/jenkinsci/warnings-ng-plugin.git')
             }
             
         }
@@ -22,7 +26,7 @@ job('git_example') {
             description('tags')
             type('TAG')
             branch('master')
-            useRepository('first')
+            useRepository('git-parameter-plugin')
             defaultValue('')
             branchFilter('')
             tagFilter('')
