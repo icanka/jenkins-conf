@@ -1,4 +1,5 @@
 node {
+    skipDefaultCheckout()
     checkout([$class: 'GitSCM', 
                           branches: [[name: "${params.TAG}"]], 
                           doGenerateSubmoduleConfigurations: false, 

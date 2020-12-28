@@ -20,7 +20,7 @@ job('git_example') {
              doGenerateSubmoduleConfigurations(false)
              gitTool('default')
              browser{
-                 gitlab{
+                 gitLab{
                      repoUrl('')
                      version('')
                  }
