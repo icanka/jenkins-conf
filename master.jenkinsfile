@@ -18,7 +18,7 @@ node{
         for(job in jobs){
             jobName = job + "_SEEDJOB"
             jobConfigPath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
-            echo "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth admin:bc5dfb61da234126b4d7ee447b8ff44c update-job ${jobName} < ${jobConfigPath}"
+            sh "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth admin:bc5dfb61da234126b4d7ee447b8ff44c update-job ${jobName} < ${jobConfigPath}"
         }
     }
 
