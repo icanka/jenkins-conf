@@ -27,7 +27,7 @@ job('git_example') {
             branchFilter('')
             tagFilter('')
             sortMode('DESCENDING_SMART')
-            selectedValue('')
+            selectedValue('NONE')
             quickFilterEnabled('')
         }
 
