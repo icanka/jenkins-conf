@@ -1,8 +1,9 @@
 def jobs = ['git-example']
 
 // The map we'll store the parallel steps in before executing them.
-def stepsForParallel = jobs.collectEntries {
-    ["echoing ${it}" : transformIntoStep(it)]
+LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
+    jobName += '_SEEDJOB'
+    ["echoing ${jobName}" : transformIntoStep(it)]
 }
 
 node{
@@ -19,12 +20,12 @@ node{
 }
 
 // Take the string and echo it.
-def transformIntoStep(jobName) {
+def transformIntoStep(String jobName) {
     // We need to wrap what we return in a Groovy closure, or else it's invoked
     // when this method is called, not when we pass it to parallel.
     // To do this, you need to wrap the code below in { }, and either return
     // that explicitly, or use { -> } syntax.
-    return {
-        build jobName
-    }
+    return {build jobName}
 }
+
+def transformIntoStep = {String jobName -> build jobName}
