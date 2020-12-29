@@ -1,3 +1,7 @@
+gitRepoUrls = ['https://github.com/jenkinsci/rest-list-parameter-plugin.git',
+             'https://github.com/jenkinsci/git-parameter-plugin.git',
+             'https://github.com/jenkinsci/warnings-ng-plugin.git']
+
 job('git_example') {
     // definition {
     //     cps {
@@ -8,46 +12,35 @@ job('git_example') {
 
     scm{
         git{
-            remote{
-                name('git-parameter-plugin')
-                url('https://github.com/jenkinsci/git-parameter-plugin.git')
+            for (repoUrl in gitRepoUrls){
+                remote{
+                    String repoName = repoUrl.split('/').last().replaceAll('.git', '')
+                    name("${repoName}")
+                    url("${repoUrl}")
+                }
             }
-            remote{
-                name('warnings-ng-plugin')
-                url('https://github.com/jenkinsci/warnings-ng-plugin.git')
-            }
-            
         }
     }
     parameters {
-        gitParameter{
-            type('PT_TAG')
-            name('git-parameter-plugin')
-            description('tags')
-            branch('')
-            useRepository('git-parameter-plugin')
-            defaultValue('')
-            branchFilter('')
-            tagFilter('')
-            sortMode('DESCENDING_SMART')
-            selectedValue('NONE')
-            quickFilterEnabled(false)
-            listSize('0')
+
+        for (repoUrl in gitRepoUrls){
+            String repoName = repoUrl.split('/').last().replaceAll('.git', '')
+            gitParameter{
+                type('PT_TAG')
+                name("${repoName}")
+                description('')
+                branch('')
+                useRepository("${repoName}")
+                defaultValue('')
+                branchFilter('')
+                tagFilter('')
+                sortMode('DESCENDING_SMART')
+                selectedValue('NONE')
+                quickFilterEnabled(false)
+                listSize('0')
+            }
         }
 
-        gitParameter{
-            type('PT_TAG')
-            name('warnings-ng-plugin')
-            description('tags')
-            branch('')
-            useRepository('warnings-ng-plugin')
-            defaultValue('')
-            branchFilter('')
-            tagFilter('')
-            sortMode('DESCENDING_SMART')
-            selectedValue('NONE')
-            quickFilterEnabled(false)
-            listSize('0')
-        }
+
     }
 }
