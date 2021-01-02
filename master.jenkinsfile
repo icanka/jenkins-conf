@@ -23,16 +23,16 @@ node{
         }
     }
 
+    stage('Run generated seedjobs'){
+        parallel stepsForParallel
+    }
+
     stage('Auth generated jobs'){
         for(job in jobs){
             jobName = job
             jobConfigPath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
             sh "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth @/var/jenkins_home/admin_auth update-job ${jobName} < ${jobConfigPath}"
         }
-    }
-
-    stage('Run generated seedjobs'){
-        parallel stepsForParallel
     }
 }
 
