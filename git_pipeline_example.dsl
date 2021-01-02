@@ -21,20 +21,28 @@ pipelineJob('git_pipeline_example') {
 
         for (repoUrl in gitRepoUrls){
             String repoName = repoUrl.split('/').last().replaceAll('.git', '')
-            gitParameter{
-                type('PT_TAG')
-                name("${repoName}")
-                description('')
-                branch('')
-                useRepository('')
-                defaultValue('')
-                branchFilter('')
-                tagFilter('')
-                sortMode('DESCENDING_SMART')
-                selectedValue('NONE')
-                quickFilterEnabled(false)
-                listSize('0')
+
+            activeChoiceParam(repoName) {
+            description('Tags for ' + repoName)
+            filterable()
+            choiceType('SINGLE_SELECT')
+            groovyScript {
+                script('''
+                def getTags = "git ls-remote -t https://github.com/icanka/test-git.git".execute()
+                def tagsRaw = []
+                def tags = []
+                getTags.text.eachLine {tagsRaw.add(it)}
+
+                for(i in tagsRaw)
+                {
+                def tagName=i.split()[1].replaceAll('\\^\\{\\}', '').replaceAll('refs/tags/', '')
+                    tags.add(tagName)
+                }
+                return tags
+                ''')
+                fallbackScript('"fallback choice"')
             }
+        }
         }
 
 
