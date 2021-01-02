@@ -27,7 +27,7 @@ pipelineJob('git_pipeline_example') {
             filterable()
             choiceType('SINGLE_SELECT')
             groovyScript {
-                script('''
+                script("""
                 def getTags = "git ls-remote -t https://github.com/icanka/test-git.git".execute()
                 def tagsRaw = []
                 def tags = []
@@ -39,7 +39,7 @@ pipelineJob('git_pipeline_example') {
                     tags.add(tagName)
                 }
                 return tags
-                ''')
+                """)
                 fallbackScript('"fallback choice"')
             }
         }
