@@ -35,7 +35,7 @@ pipelineJob('git_pipeline_example') {
 
                 for(i in tagsRaw)
                 {
-                def tagName=i.split()[1].replaceAll('\\^\\{\\}', '').replaceAll('refs/tags/', '')
+                def tagName=i.split()[1].replaceAll('\\\\^\\\\{\\\\}', '').replaceAll('refs/tags/', '')
                     tags.add(tagName)
                 }
                 return tags
