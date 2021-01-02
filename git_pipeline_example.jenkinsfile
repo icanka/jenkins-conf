@@ -1,4 +1,17 @@
-node {
-    skipDefaultCheckout()
-    git url: 'https://github.com/jenkinsci/git-parameter-plugin.git'
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: "${params.TAG}"]], 
+                          doGenerateSubmoduleConfigurations: false, 
+                          extensions: [], 
+                          gitTool: 'Default', 
+                          submoduleCfg: [], 
+                          userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']]
+                        ])
+            }
+        }
+    }
 }
