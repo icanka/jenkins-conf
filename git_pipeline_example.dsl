@@ -16,4 +16,28 @@ pipelineJob('git_pipeline_example') {
         }
     }
 
+
+    parameters {
+
+        for (repoUrl in gitRepoUrls){
+            String repoName = repoUrl.split('/').last().replaceAll('.git', '')
+            gitParameter{
+                type('PT_TAG')
+                name("${repoName}")
+                description('')
+                branch('')
+                //useRepository("${repoName}")
+                defaultValue('')
+                branchFilter('')
+                tagFilter('')
+                sortMode('DESCENDING_SMART')
+                selectedValue('NONE')
+                quickFilterEnabled(false)
+                listSize('0')
+            }
+        }
+
+
+    }
+
 }
