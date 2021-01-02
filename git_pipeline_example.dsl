@@ -11,16 +11,9 @@ job('git_pipeline_example') {
     // }
 
     definition {
-            cpsScm {
-                scm {
-                    git {
-                        remote{
-                            github('jenkinsci/pipeline-examples')
-                        }
-                    }
-                }
-                scriptPath('declarative-examples/simple-examples/environmentInStage.groovy')
-            }
+            cps {
+                script(readFileFromWorkspace('git_pipeline_example.jenkinsfile')) 
+        }
     }
 
 }
