@@ -28,7 +28,8 @@ pipelineJob('git_pipeline_example') {
             choiceType('SINGLE_SELECT')
             groovyScript {
                 script("""
-                def getTags = "git ls-remote -t https://github.com/icanka/test-git.git".execute()
+                String gitCommand = "git ls-remote -t " + ${repoUrl}
+                def getTags = gitCommand.execute()
                 def tagsRaw = []
                 def tags = []
                 getTags.text.eachLine {tagsRaw.add(it)}
