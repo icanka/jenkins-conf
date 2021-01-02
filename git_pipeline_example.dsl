@@ -26,7 +26,7 @@ pipelineJob('git_pipeline_example') {
                 name("${repoName}")
                 description('')
                 branch('')
-                //useRepository("${repoName}")
+                useRepository('')
                 defaultValue('')
                 branchFilter('')
                 tagFilter('')
