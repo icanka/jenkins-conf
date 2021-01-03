@@ -21,8 +21,9 @@ pipelineJob('git_pipeline_example') {
 
         for (repoUrl in gitRepoUrls){
             String repoName = repoUrl.split('/').last().replaceAll('.git', '')
+            repoName = repoName.replaceAll('-', '_')
 
-            activeChoiceReactiveParam(repoName+"_TAG") {
+            activeChoiceReactiveParam(repoName + "_TAG") {
                 description('Tags for ' + repoName)
                 filterable()
                 choiceType('SINGLE_SELECT')
@@ -45,7 +46,7 @@ pipelineJob('git_pipeline_example') {
                 }
             }
 
-            activeChoiceReactiveParam(repoName+"_BRANCH") {
+            activeChoiceReactiveParam(repoName + "_BRANCH") {
                 description('Branches for ' + repoName)
                 filterable()
                 choiceType('SINGLE_SELECT')
