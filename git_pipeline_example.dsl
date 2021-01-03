@@ -45,13 +45,14 @@ pipelineJob('git_pipeline_example') {
                 }
             }
 
-            activeChoiceReactiveParam(repoName+"BRANCH") {
+            activeChoiceReactiveParam(repoName+"_BRANCH") {
                 description('Branches for ' + repoName)
                 filterable()
                 choiceType('SINGLE_SELECT')
                 groovyScript {
                     script("""
-                    def getBranches = "git ls-remote --heads "${repoUrl}".execute()
+                    String gitCommand = "git ls-remote --heads " + "${repoUrl}"
+                    def getBranches = gitCommand.execute()
 
                     def branches_raw = []
                     def branchNames = []
