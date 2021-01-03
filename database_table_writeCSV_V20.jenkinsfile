@@ -1,1 +1,54 @@
-echo "EMPTY"
+import groovy.sql.Sql
+import org.apache.commons.csv.*
+def output = []
+
+@NonCPS
+def get_data(){
+    
+    def sql = Sql.newInstance("jdbc:mysql://db:3306/employees", "root", "1234", "com.mysql.jdbc.Driver")
+    def csvData = []
+    
+    println "printCol"
+    def printColNames = { meta ->
+           def buffer_columns = []
+         (1..meta.columnCount).each {
+             buffer_columns.push(meta.getColumnLabel(it))
+         }
+         csvData.push(buffer_columns)
+     }
+    println "printColEND"
+         
+         
+    println "printRow"
+     def printRow = { row ->
+         def buffer_row=[]
+         row.toRowResult().values().each{ buffer_row.push(it) }
+         csvData.push(buffer_row)
+     }
+    println "printRowEND"
+
+    
+    println "eachRow"
+    sql.eachRow("select * from " + TABLE_NAME, printColNames, printRow)
+    println "eachRowEND"
+    return csvData
+}
+
+node {
+    stage('Preparation') { 
+            echo "calling method"
+            output = get_data()
+            echo " called method"
+            echo "foor loop"
+            //for(i=0;i<output.size();i++){
+                //echo output[i].toString()
+            //}
+            echo "for loop end"
+            writeCSV file: TABLE_NAME+'.csv', records: output, format: CSVFormat.EXCEL
+            
+            def base_url ="https://localhost/job/database-table-writeCSV/"
+            echo "visit: " + base_url + BUILD_NUMBER + "/ws/"
+    }
+}
+
+println "HELLO"
