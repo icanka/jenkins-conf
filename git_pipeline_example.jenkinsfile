@@ -8,7 +8,7 @@ node {
         //sh "wget http://localhost/job/git-tag-list/ws/deneme.txt"
         // Get some code from a GitHub repository
         //git credentialsId: 'e792ad81-4812-42cb-9ca6-a82d978b93ac', url: 'git@github.com:icanka/test-git.git'
-        checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/${BRANCH}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true], [$class: 'WipeWorkspace']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'e792ad81-4812-42cb-9ca6-a82d978b93ac', name: 'origin', refspec: '+refs/heads/${BRANCH}:refs/remotes/origin/${BRANCH}', url: 'git@github.com:icanka/test-git.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/${rest-list-parameter-plugin_BRANCH}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true], [$class: 'WipeWorkspace']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'e792ad81-4812-42cb-9ca6-a82d978b93ac', name: 'origin', refspec: '+refs/heads/${rest-list-parameter-plugin_BRANCH}:refs/remotes/origin/${rest-list-parameter-plugin_BRANCH}', url: 'git@github.com:icanka/test-git.git']]])
     }
     
     // stage("Tagging"){
