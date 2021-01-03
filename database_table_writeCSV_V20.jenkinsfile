@@ -5,7 +5,7 @@ def output = []
 @NonCPS
 def get_data(){
     
-    def sql = Sql.newInstance("jdbc:mysql://db:3306/employees", "root", "1234", "com.mysql.jdbc.Driver")
+    def sql = Sql.newInstance("jdbc:mysql://db_host:3306/employees", "root", "1234", "com.mysql.jdbc.Driver")
     def csvData = []
     
     println "printCol"
