@@ -1,8 +1,8 @@
-pipelineJob('database_table_writeCSV_V2.0') {
+pipelineJob('database_table_writeCSV_V20') {
    
     definition {
             cps {
-                script(readFileFromWorkspace('database_table_writeCSV_V2.0.jenkinsfile'))
+                script(readFileFromWorkspace('database_table_writeCSV_V20.jenkinsfile'))
             }
     }
 

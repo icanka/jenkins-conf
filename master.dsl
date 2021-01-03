@@ -1,6 +1,6 @@
 def jobs = ['git_example',
             'git_pipeline_example',
-            'database_table_writeCSV_V2.0']
+            'database_table_writeCSV_V20']
 
 for (jobName in jobs){
     fileName = jobName + ".seedjob"
