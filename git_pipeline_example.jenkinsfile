@@ -1,4 +1,48 @@
 node {
-    skipDefaultCheckout()
-    git url: 'https://github.com/jenkinsci/git-parameter-plugin.git'
+   
+    def gitCommit
+    
+    stage("Checkout") {
+        echo BUILD_NUMBER
+        echo WORKSPACE
+        //sh "wget http://localhost/job/git-tag-list/ws/deneme.txt"
+        // Get some code from a GitHub repository
+        //git credentialsId: 'e792ad81-4812-42cb-9ca6-a82d978b93ac', url: 'git@github.com:icanka/test-git.git'
+        checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/${BRANCH}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true], [$class: 'WipeWorkspace']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'e792ad81-4812-42cb-9ca6-a82d978b93ac', name: 'origin', refspec: '+refs/heads/${BRANCH}:refs/remotes/origin/${BRANCH}', url: 'git@github.com:icanka/test-git.git']]])
+    }
+    
+    // stage("Tagging"){
+        
+    //     username = "Emre Karagoz"
+    //     email = "emre_karagoz@gmail.com"
+    //     tag_message = TAG_MESSAGE
+    //     tag_name = TAG_NAME
+        
+        
+    //     withCredentials([sshUserPrivateKey(credentialsId: 'e792ad81-4812-42cb-9ca6-a82d978b93ac', keyFileVariable: 'SSH_KEY')]) {
+            
+    //         sh 'echo ssh -i $SSH_KEY -l git -o StrictHostKeyChecking=no \\"\\$@\\" > local_ssh.sh'
+    //         sh 'chmod +x local_ssh.sh'
+            
+    //         withEnv(['GIT_SSH=./local_ssh.sh']) {
+                
+    //             gitCommit = sh(returnStdout: true, script: """
+    //                                                          git config  user.email '${email}'
+    //                                                          git config  user.name '${username}'
+    //                                                          git tag -a ${tag_name} -m '${tag_message}'
+    //                                                          git push origin ${tag_name}
+    //                                                          pwd
+    //                                                          """).trim()
+    //         }
+    //     }
+        
+    //     echo gitCommit
+        
+        
+    // }
+    
+    ansiColor('xterm') {
+        echo "\u001B[31m$gitCommit\u001B[0m "
+    }
+    
 }
