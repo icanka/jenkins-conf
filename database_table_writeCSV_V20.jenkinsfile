@@ -46,7 +46,7 @@ node {
             echo "for loop end"
             writeCSV file: TABLE_NAME+'.csv', records: output, format: CSVFormat.EXCEL
             
-            def base_url ="https://localhost/job/database-table-writeCSV/"
+            def base_url ="https://jenkins.local/job/database_table_writeCSV_V20/"
             echo "visit: " + base_url + BUILD_NUMBER + "/ws/"
     }
 }
