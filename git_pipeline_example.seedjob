@@ -2,7 +2,7 @@ jobName = 'git_pipeline_example'
 
 node{
     stage('Checkout from source control'){
-        checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git-cred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'git@github.com:icanka/jenkins-conf.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github-cred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'git@github.com:icanka/jenkins-conf.git']]])
     }
     stage('Process job dsl'){
         jobDsl targets: 'git_pipeline_example.dsl'

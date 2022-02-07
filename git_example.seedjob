@@ -7,7 +7,7 @@ node{
         doGenerateSubmoduleConfigurations: false, extensions:
          [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]],
          submoduleCfg: [], userRemoteConfigs:
-         [[credentialsId: 'git-cred',
+         [[credentialsId: 'github-cred',
          refspec: '+refs/heads/master:refs/remotes/origin/master',
          url: 'git@github.com:icanka/jenkins-conf.git']]]
          )
