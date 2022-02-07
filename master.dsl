@@ -47,6 +47,17 @@ def dslDefinition(String test, Closure closure) {
     }
 }
 
+
+
+ClassLoader cl = ClassLoader.getSystemClassLoader();
+
+        URL[] urls = ((URLClassLoader)cl).getURLs();
+        println "URLS:"
+        println urls
+
+        for(URL url: urls){
+        	System.out.println(url.getFile());
+        }
 dslDefinition("test string"){
             parameters {
             activeChoiceParam('CHOICE-1') {
