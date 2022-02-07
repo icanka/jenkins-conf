@@ -24,7 +24,8 @@ def dslDefinition(String test, Closure closure) {
             closure.delegate = delegate
             println closure.owner
             println closure.delegate
-            ContextHelper
+            ContextHelper.executeInContext(closure, delegate)
+            //ContextHelper
             //closure()
 
         }
