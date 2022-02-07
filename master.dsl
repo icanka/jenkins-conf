@@ -7,9 +7,11 @@ def dslDefinition(String test, Closure closure) {
     pipelineJob('git_example_SEEDJOB') {
         
         definition {
+            println "##################"
             println this
             println owner
             println delegate
+            println "####################"
             cps {
                 script(readFileFromWorkspace('git_example.seedjob'))
                 sandbox()
@@ -22,6 +24,8 @@ def dslDefinition(String test, Closure closure) {
         }
 
         println this
+        println owner
+        println delegate
         println "CLOSURE OWNER AND DELEGATE"
         println closure.owner
         println closure.delegate
