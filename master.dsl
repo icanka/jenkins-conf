@@ -3,7 +3,7 @@
 //             'database_table_writeCSV_V20']
 
 def dslDefinition(String test, Closure closure) {
-    pipelineJob('git-example') {
+    pipelineJob('git_example_SEEDJOB') {
         definition {
             cps {
                 script(readFileFromWorkspace('git_example.seedjob'))
