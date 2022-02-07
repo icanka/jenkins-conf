@@ -1,6 +1,7 @@
 def jobs = ['git_example',
-            'git_pipeline_example',
-            'database_table_writeCSV_V20']
+            // 'git_pipeline_example',
+            // 'database_table_writeCSV_V20'
+            ]
 
 // The map we'll store the parallel steps in before executing them.
 LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->

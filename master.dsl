@@ -15,17 +15,17 @@ def dslDefinition(String test, Closure closure) {
         println this
         println owner
         println delegate
-        parameters {
-            activeChoiceParam('CHOICE-1') {
-                description('Allows user choose from multiple choices')
-                filterable()
-                choiceType('SINGLE_SELECT')
-                groovyScript {
-                    script('["choice1", "choice2"]')
-                    fallbackScript('"fallback choice"')
-                }
-            }
-        }
+        // parameters {
+        //     activeChoiceParam('CHOICE-1') {
+        //         description('Allows user choose from multiple choices')
+        //         filterable()
+        //         choiceType('SINGLE_SELECT')
+        //         groovyScript {
+        //             script('["choice1", "choice2"]')
+        //             fallbackScript('"fallback choice"')
+        //         }
+        //     }
+        // }
         println "######################################################################################################"
         println this
         println "CLOSURE OWNER AND DELEGATE"
@@ -42,7 +42,19 @@ def dslDefinition(String test, Closure closure) {
     
 }
 
-dslDefinition("test string"){println "clousure block test println"}
+dslDefinition("test string"){
+            parameters {
+            activeChoiceParam('CHOICE-1') {
+                description('Allows user choose from multiple choices')
+                filterable()
+                choiceType('SINGLE_SELECT')
+                groovyScript {
+                    script('["choice1", "choice2"]')
+                    fallbackScript('"fallback choice"')
+                }
+            }
+        }
+}
 
 // for (jobName in jobs){
 //     fileName = jobName + ".seedjob"
