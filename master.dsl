@@ -11,6 +11,10 @@ def dslDefinition(String test, Closure closure) {
             }
         }
 
+        println "######################################################################################################"
+        println this
+        println owner
+        println delegate
         parameters {
             activeChoiceParam('CHOICE-1') {
                 description('Allows user choose from multiple choices')
@@ -22,6 +26,8 @@ def dslDefinition(String test, Closure closure) {
                 }
             }
         }
+        println "######################################################################################################"
+
     }
 
     closure()
