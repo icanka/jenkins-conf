@@ -10,10 +10,10 @@ job('git_example') {
     //     }
     // }
 
-    scm{
-        git{
-            for (repoUrl in gitRepoUrls){
-                remote{
+    scm {
+        git {
+            for (repoUrl in gitRepoUrls) {
+                remote {
                     String repoName = repoUrl.split('/').last().replaceAll('.git', '')
                     name("${repoName}")
                     url("${repoUrl}")
@@ -22,10 +22,9 @@ job('git_example') {
         }
     }
     parameters {
-
-        for (repoUrl in gitRepoUrls){
+        for (repoUrl in gitRepoUrls) {
             String repoName = repoUrl.split('/').last().replaceAll('.git', '')
-            gitParameter{
+            gitParameter {
                 type('PT_TAG')
                 name("${repoName}")
                 description('')
@@ -40,7 +39,6 @@ job('git_example') {
                 listSize('0')
             }
         }
-
 
     }
 }
