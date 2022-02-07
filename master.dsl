@@ -6,6 +6,9 @@ import javaposse.jobdsl.dsl.ContextHelper
 def dslDefinition(String test, Closure closure) {
     pipelineJob('git_example_SEEDJOB') {
         definition {
+            println this
+            println owner
+            println delegate
             cps {
                 script(readFileFromWorkspace('git_example.seedjob'))
                 sandbox()
@@ -21,6 +24,7 @@ def dslDefinition(String test, Closure closure) {
             closure.delegate = delegate
             println closure.owner
             println closure.delegate
+            ContextHelper
             //closure()
 
         }
