@@ -30,6 +30,8 @@ def dslDefinition(String test, Closure closure) {
 
     }
 
+    println closure.owner
+    println closure.delegate
     closure()
 }
 
