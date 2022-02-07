@@ -34,6 +34,13 @@ def dslDefinition(String test, Closure closure) {
         closure.delegate = delegate
         println closure.owner
         println closure.delegate
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+
+        URL[] urls = ((URLClassLoader)cl).getURLs();
+
+        for(URL url: urls){
+        	System.out.println(url.getFile());
+        }
         ContextHelper.executeInContext(closure, delegate)
     }
 }
