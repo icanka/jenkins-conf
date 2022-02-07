@@ -10,7 +10,7 @@ LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
 
 node{
     stage('checkout from version control') {
-        checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'c3e7e893-b87b-4194-a7cf-0f54fb5c56fa', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'git@gitlab_server:raflman/jenkins-conf.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github-creds', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'git@github.com:icanka/jenkins-conf.git']]])
     }
     stage('process job dsl'){
         jobDsl targets: 'master.dsl'
