@@ -27,12 +27,19 @@ def dslDefinition(String test, Closure closure) {
             }
         }
         println "######################################################################################################"
-
+        prinln this
+        println "CLOSURE OWNER AND DELEGATE"
+        println closure.owner
+        println closure.delegate
+        println "CLOSURE OWNER AND DELEGATE AGAIN"
+        closure.owner = owner
+        closure.delegate = delegate
+        println closure.owner
+        println closure.delegate
+        closure()
     }
 
-    println closure.owner
-    println closure.delegate
-    closure()
+    
 }
 
 dslDefinition("test string"){println "clousure block test println"}
