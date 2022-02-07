@@ -2,7 +2,7 @@
 //             'git_pipeline_example',
 //             'database_table_writeCSV_V20']
 
-def dslDefinition(String test, Clousure clousure) {
+def dslDefinition(String test, Closure closure) {
     pipelineJob('git-example') {
         definition {
             cps {
@@ -24,7 +24,7 @@ def dslDefinition(String test, Clousure clousure) {
         }
     }
 
-    clousure()
+    closure()
 }
 
 dslDefinition("test string"){println "clousure block test println"}
