@@ -5,6 +5,7 @@ import javaposse.jobdsl.dsl.ContextHelper
 
 def dslDefinition(String test, Closure closure) {
     pipelineJob('git_example_SEEDJOB') {
+        
         definition {
             println this
             println owner
@@ -15,20 +16,21 @@ def dslDefinition(String test, Closure closure) {
             }
 
 
-            println this
-            println "CLOSURE OWNER AND DELEGATE"
-            println closure.owner
-            println closure.delegate
-            println "CLOSURE OWNER AND DELEGATE AGAIN"
-            closure.owner = owner
-            closure.delegate = delegate
-            println closure.owner
-            println closure.delegate
-            ContextHelper.executeInContext(closure, delegate)
             //ContextHelper
             //closure()
 
         }
+
+        println this
+        println "CLOSURE OWNER AND DELEGATE"
+        println closure.owner
+        println closure.delegate
+        println "CLOSURE OWNER AND DELEGATE AGAIN"
+        closure.owner = owner
+        closure.delegate = delegate
+        println closure.owner
+        println closure.delegate
+        ContextHelper.executeInContext(closure, delegate)
     }
 }
 
