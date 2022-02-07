@@ -1,3 +1,4 @@
+import javaposse.jobdsl.dsl.ContextHelper
 // def jobs = ['git_example',
 //             'git_pipeline_example',
 //             'database_table_writeCSV_V20']
@@ -20,7 +21,7 @@ def dslDefinition(String test, Closure closure) {
             closure.delegate = delegate
             println closure.owner
             println closure.delegate
-            closure()
+            //closure()
 
         }
     }
