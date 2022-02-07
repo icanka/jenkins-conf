@@ -27,6 +27,8 @@ def dslDefinition(String test, Clousure clousure) {
     clousure()
 }
 
+dslDefinition("test string"){println "clousure block test println"}
+
 // for (jobName in jobs){
 //     fileName = jobName + ".seedjob"
 //     jobName += "_SEEDJOB"
