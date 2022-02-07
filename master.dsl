@@ -27,7 +27,7 @@ def dslDefinition(String test, Closure closure) {
             }
         }
         println "######################################################################################################"
-        prinln this
+        println this
         println "CLOSURE OWNER AND DELEGATE"
         println closure.owner
         println closure.delegate
