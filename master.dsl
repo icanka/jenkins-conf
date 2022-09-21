@@ -3,74 +3,7 @@ import javaposse.jobdsl.dsl.ContextHelper
 //             'git_pipeline_example',
 //             'database_table_writeCSV_V20']
 
-def dslDefinition(String test, Closure closure) {
-    pipelineJob('git_example_SEEDJOB') {
-        
-        definition {
-            println "##################"d
-            println this
-            println owner
-            println delegate
-            println "####################"
-            cps {
-                script(readFileFromWorkspace('git_example.seedjob'))
-                sandbox()
-            }
 
-
-            //ContextHelper
-            //closure()
-
-        }
-
-        println this
-        println owner
-        println delegate
-        println "CLOSURE OWNER AND DELEGATE"
-        println closure.owner
-        println closure.delegate
-        println "CLOSURE OWNER AND DELEGATE AGAIN"
-        closure.owner = owner
-        closure.delegate = delegate
-        println closure.owner
-        println closure.delegate
-        ClassLoader cl = ClassLoader.getSystemClassLoader();
-
-        URL[] urls = ((URLClassLoader)cl).getURLs();
-        println "URLS:"
-        println urls
-
-        for(URL url: urls){
-            System.out.println(url.getFile());
-        }
-        ContextHelper.executeInContext(closure, delegate)
-    }
-}
-
-
-
-ClassLoader cl = ClassLoader.getSystemClassLoader();
-
-        URL[] urls = ((URLClassLoader)cl).getURLs();
-        println "URLS:"
-        println urls
-
-        for(URL url: urls){
-            System.out.println(url.getFile());
-        }
-dslDefinition("test string"){
-            parameters {
-            activeChoiceParam('CHOICE-1') {
-                description('Allows user choose from multiple choices')
-                filterable()
-                choiceType('SINGLE_SELECT')
-                groovyScript {
-                    script('["choice1", "choice2"]')
-                    fallbackScript('"fallback choice"')
-                }
-            }
-        }
-}
 
 // for (jobName in jobs){
 //     fileName = jobName + ".seedjob"
@@ -88,23 +21,22 @@ dslDefinition("test string"){
 
 // }
 
-// pipelineJob('git-example') {
-//     definition {
-//         cps {
-//             script(readFileFromWorkspace('test.jenkinsfile'))
-//             sandbox()
-//         }
-//     }
-
-//     parameters {
-//         activeChoiceParam('CHOICE-1') {
-//             description('Allows user choose from multiple choices')
-//             filterable()
-//             choiceType('SINGLE_SELECT')
-//             groovyScript {
-//                 script('["choice1", "choice2"]')
-//                 fallbackScript('"fallback choice"')
-//             }
-//         }
-//     }
-// }
+ pipelineJob('git-example') {
+     definition {
+         cps {
+             script(readFileFromWorkspace('test.jenkinsfile'))
+             sandbox()
+         }
+     }
+     parameters {
+         activeChoiceParam('CHOICE-1') {
+             description('Allows user choose from multiple choices')
+             filterable()
+             choiceType('SINGLE_SELECT')
+             groovyScript {
+                 script('["choice1", "choice2"]')
+                 fallbackScript('"fallback choice"')
+             }
+         }
+     }
+ }
