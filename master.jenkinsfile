@@ -9,7 +9,7 @@ LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
     ["echoing ${jobName}" : transformIntoStep(jobName)]
 }
 
-node{
+node('slave'){
     stage('checkout from version control') {
         checkout([$class: 'GitSCM', branches:
         [[name: 'refs/heads/master']],
