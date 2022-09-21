@@ -1,42 +1,27 @@
-import javaposse.jobdsl.dsl.ContextHelper
-// def jobs = ['git_example',
-//             'git_pipeline_example',
-//             'database_table_writeCSV_V20']
+String basePath = 'example1'
+String repo = 'sheehan/gradle-example'
 
+folder(basePath) {
+    description 'This example shows basic folder/job creation.'
+}
 
+job("$basePath/gradle-example-build") {
+    scm {
+        github repo
+    }
+    triggers {
+        scm 'H/5 * * * *'
+    }
+    steps {
+        gradle 'assemble'
+    }
+}
 
-// for (jobName in jobs){
-//     fileName = jobName + ".seedjob"
-//     jobName += "_SEEDJOB"
-
-//     pipelineJob(jobName) {
-//         definition {
-//             cps {
-//                 script(readFileFromWorkspace(fileName))
-//                 //sandbox()
-//             }
-//         }
-
-//     }
-
-// }
-
- pipelineJob('git-example') {
-     definition {
-         cps {
-             script(readFileFromWorkspace('test.jenkinsfile'))
-             sandbox()
-         }
-     }
-     parameters {
-         activeChoiceParam('CHOICE-1') {
-             description('Allows user choose from multiple choices')
-             filterable()
-             choiceType('SINGLE_SELECT')
-             groovyScript {
-                 script('["choice1", "choice2"]')
-                 fallbackScript('"fallback choice"')
-             }
-         }
-     }
- }
+job("$basePath/gradle-example-deploy") {
+    parameters {
+        stringParam 'host'
+    }
+    steps {
+        shell 'scp war file; restart...'
+    }
+}
