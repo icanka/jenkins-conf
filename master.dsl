@@ -7,7 +7,7 @@ def dslDefinition(String test, Closure closure) {
     pipelineJob('git_example_SEEDJOB') {
         
         definition {
-            println "##################"
+            println "##################"d
             println this
             println owner
             println delegate
@@ -41,7 +41,7 @@ def dslDefinition(String test, Closure closure) {
         println urls
 
         for(URL url: urls){
-        	System.out.println(url.getFile());
+            System.out.println(url.getFile());
         }
         ContextHelper.executeInContext(closure, delegate)
     }
@@ -56,7 +56,7 @@ ClassLoader cl = ClassLoader.getSystemClassLoader();
         println urls
 
         for(URL url: urls){
-        	System.out.println(url.getFile());
+            System.out.println(url.getFile());
         }
 dslDefinition("test string"){
             parameters {

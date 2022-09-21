@@ -20,6 +20,7 @@ node{
         refspec: '+refs/heads/master:refs/remotes/origin/master',
         url: 'git@github.com:icanka/jenkins-conf.git']]])
     }
+    
     stage('process job dsl'){
         jobDsl targets: 'master.dsl'
     }
