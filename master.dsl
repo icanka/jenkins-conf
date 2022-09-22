@@ -73,7 +73,7 @@ for (jobName in jobs){
 pipelineJob('git-example') {
     definition {
         cps {
-            script(readFileFromWorkspace('test.jenkinsfile'))
+            script(readFileFromWorkspace('advent-jenkins-conf/test.jenkinsfile'))
             sandbox()
         }
     }
