@@ -4,10 +4,10 @@ def jobs = ['git_example',
             ]
 
 // The map we'll store the parallel steps in before executing them.
-LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
-    jobName += '_SEEDJOB'
-    ["echoing ${jobName}" : transformIntoStep(jobName)]
-}
+// LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
+//     jobName += '_SEEDJOB'
+//     ["echoing ${jobName}" : transformIntoStep(jobName)]
+// }
 
 node('slave'){
     stage('checkout from version control') {
