@@ -1,10 +1,36 @@
 jobName = 'git_pipeline_example'
 
-node{
+node('slave'){
     stage('Checkout from source control'){
         checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github-cred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'git@github.com:icanka/jenkins-conf.git']]])
+        checkout([
+            $class: 'GitSCM', 
+            branches: [[name: 'refs/heads/master']],
+            doGenerateSubmoduleConfigurations: false, 
+            extensions: 
+            [[
+                $class: 'CloneOption', 
+                honorRefspec: true,
+                noTags: true, 
+                reference: '', 
+                shallow: true
+            ],
+            [
+                $class: 'RelativeTargetDirectory',
+                relativeTargetDir: 'shared-lib'
+            ]],
+            submoduleCfg: [], 
+            userRemoteConfigs: 
+                [[
+                    credentialsId: 'github-cred',
+                    refspec: '+refs/heads/master:refs/remotes/origin/master',
+                    url: 'git@github.com:icanka/shared-library.git'
+                ]]
+        ])
+        
     }
     stage('Process job dsl'){
-        jobDsl targets: 'git_pipeline_example.dsl'
+        jobDsl targets: 'git_pipeline_example.dsl',
+        additionalClasspath: 'shared-lib/src'
     }
 }
