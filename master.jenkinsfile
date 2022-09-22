@@ -11,48 +11,80 @@ LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
 
 node('slave'){
     stage('checkout from version control') {
-        checkout([$class: 'GitSCM', branches:
-        [[name: 'refs/heads/master']],
-        doGenerateSubmoduleConfigurations: false, extensions:
-        [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]],
-        submoduleCfg: [], userRemoteConfigs:
-        [[credentialsId: 'github-cred',
-        refspec: '+refs/heads/master:refs/remotes/origin/master',
-        url: 'git@github.com:icanka/jenkins-conf.git']]])
+        checkout([
+            $class: 'GitSCM', 
+            branches: [[name: 'refs/heads/master']],
+            doGenerateSubmoduleConfigurations: false, 
+            extensions: 
+            [[
+                $class: 'CloneOption', 
+                honorRefspec: true,
+                noTags: true, 
+                reference: '', 
+                shallow: true
+            ]],
+            submoduleCfg: [], 
+            userRemoteConfigs: 
+                [[
+                    credentialsId: 'github-cred',
+                    refspec: '+refs/heads/master:refs/remotes/origin/master',
+                    url: 'git@github.com:icanka/jenkins-conf.git'
+                ]]
+        ])
+        checkout([
+            $class: 'GitSCM', 
+            branches: [[name: 'refs/heads/master']],
+            doGenerateSubmoduleConfigurations: false, 
+            extensions: 
+            [[
+                $class: 'CloneOption', 
+                honorRefspec: true,
+                noTags: true, 
+                reference: '', 
+                shallow: true
+            ]],
+            submoduleCfg: [], 
+            userRemoteConfigs: 
+                [[
+                    credentialsId: 'github-cred',
+                    refspec: '+refs/heads/master:refs/remotes/origin/master',
+                    url: 'git@github.com:icanka/shared-library.git'
+                ]]
+        ])
     }
     
-    stage('process job dsl'){
-        jobDsl targets: 'master.dsl'
-    }
+    // stage('process job dsl'){
+    //     jobDsl targets: 'master.dsl'
+    // }
 
-    stage('Auth generated seedjobs'){
-        for(job in jobs){
-            jobName = job + "_SEEDJOB"
-            jobConfigPath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
-            sh "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth @/var/jenkins_home/admin_auth update-job ${jobName} < ${jobConfigPath}"
-        }
-    }
+    // stage('Auth generated seedjobs'){
+    //     for(job in jobs){
+    //         jobName = job + "_SEEDJOB"
+    //         jobConfigPath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
+    //         sh "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth @/var/jenkins_home/admin_auth update-job ${jobName} < ${jobConfigPath}"
+    //     }
+    // }
 
-    stage('Run generated seedjobs'){
-        parallel stepsForParallel
-    }
+    // stage('Run generated seedjobs'){
+    //     parallel stepsForParallel
+    // }
 
-    stage('Auth generated jobs'){
-        for(job in jobs){
-            jobName = job
-            jobConfigPath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
-            sh "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth @/var/jenkins_home/admin_auth update-job ${jobName} < ${jobConfigPath}"
-        }
-    }
+    // stage('Auth generated jobs'){
+    //     for(job in jobs){
+    //         jobName = job
+    //         jobConfigPath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
+    //         sh "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth @/var/jenkins_home/admin_auth update-job ${jobName} < ${jobConfigPath}"
+    //     }
+    // }
 }
 
-// Take the string and echo it.
-def transformIntoStep(String jobName) {
-    // We need to wrap what we return in a Groovy closure, or else it's invoked
-    // when this method is called, not when we pass it to parallel.
-    // To do this, you need to wrap the code below in { }, and either return
-    // that explicitly, or use { -> } syntax.
-    return {build jobName}
-}
+// // Take the string and echo it.
+// def transformIntoStep(String jobName) {
+//     // We need to wrap what we return in a Groovy closure, or else it's invoked
+//     // when this method is called, not when we pass it to parallel.
+//     // To do this, you need to wrap the code below in { }, and either return
+//     // that explicitly, or use { -> } syntax.
+//     return {build jobName}
+// }
 
-def transformIntoStep = {String jobName -> build jobName}
+// def transformIntoStep = {String jobName -> build jobName}
