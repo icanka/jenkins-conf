@@ -9,7 +9,7 @@ def jobs = ['git_example',
 //     ["echoing ${jobName}" : transformIntoStep(jobName)]
 // }
 
-node('slave'){
+node('built-in'){
     stage('checkout from version control') {
         checkout([
             $class: 'GitSCM', 
@@ -22,6 +22,10 @@ node('slave'){
                 noTags: true, 
                 reference: '', 
                 shallow: true
+            ],
+            [
+                $class: 'RelativeTargetDirectory',
+                relativeTargetDir: 'advent-jenkins-conf'
             ]],
             submoduleCfg: [], 
             userRemoteConfigs: 
