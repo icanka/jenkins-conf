@@ -61,7 +61,7 @@ for (jobName in jobs){
     pipelineJob(jobName) {
         definition {
             cps {
-                script(readFileFromWorkspace(fileName))
+                script(readFileFromWorkspace('advent-jenkins-conf/' + fileName))
                 //sandbox()
             }
         }
