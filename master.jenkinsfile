@@ -46,9 +46,10 @@ node('built-in'){
                 noTags: true, 
                 reference: '', 
                 shallow: true
+            ],
             [
                 $class: 'RelativeTargetDirectory',
-                relativeTargetDir: 'shared-lib'
+                relativeTargetDir: 'advent-jenkins-conf'
             ]],
             submoduleCfg: [], 
             userRemoteConfigs: 
