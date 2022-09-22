@@ -3,7 +3,7 @@ def jobs = ['git_example',
             'git_pipeline_example',
             'database_table_writeCSV_V20']
 println "sleeping"
-Thread.sleep(60000)
+Thread.sleep(60)
 def dslDefinition(String test, Closure closure) {
     pipelineJob('git_example_SEEDJOB') {
         
