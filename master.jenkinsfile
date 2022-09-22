@@ -15,7 +15,7 @@ def jobs = ['git_example',
 // The map we'll store the parallel steps in before executing them.
 LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
     jobName += '_SEEDJOB'
-    [("echoing ${jobName}" + Math.random()) : jobName]
+    [("echoing ${jobName}" + Math.random()) :  transformIntoStep(jobName)]
 }
 
 node('built-in'){
