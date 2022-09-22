@@ -18,7 +18,7 @@ LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
     [("echoing ${jobName}" + Math.random()) :  transformIntoStep(jobName)]
 }
 
-node('built-in'){
+node('slave'){
     stage('checkout from version control') {
         checkout([
             $class: 'GitSCM', 
