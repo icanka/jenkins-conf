@@ -62,7 +62,6 @@ node('built-in'){
     }
     
     stage('process job dsl'){
-        for ()
         jobDsl targets: 'advent-jenkins-conf/master.dsl',
         additionalClasspath: 'shared-lib/src'
     }
