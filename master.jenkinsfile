@@ -1,13 +1,13 @@
 def jobs = ['git_example',
-            // 'git_pipeline_example',
-            // 'database_table_writeCSV_V20'
+            'git_pipeline_example',
+            'database_table_writeCSV_V20'
             ]
 
 // The map we'll store the parallel steps in before executing them.
-// LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
-//     jobName += '_SEEDJOB'
-//     ["echoing ${jobName}" : transformIntoStep(jobName)]
-// }
+LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
+    jobName += '_SEEDJOB'
+    ["echoing ${jobName}" : transformIntoStep(jobName)]
+}
 
 node('built-in'){
     stage('checkout from version control') {
@@ -62,6 +62,7 @@ node('built-in'){
     }
     
     stage('process job dsl'){
+        for ()
         jobDsl targets: 'advent-jenkins-conf/master.dsl',
         additionalClasspath: 'shared-lib/src'
     }
@@ -74,9 +75,9 @@ node('built-in'){
     //     }
     // }
 
-    // stage('Run generated seedjobs'){
-    //     parallel stepsForParallel
-    // }
+    stage('Run generated seedjobs'){
+        parallel stepsForParallel
+    }
 
     // stage('Auth generated jobs'){
     //     for(job in jobs){
@@ -87,13 +88,13 @@ node('built-in'){
     // }
 }
 
-// // Take the string and echo it.
-// def transformIntoStep(String jobName) {
-//     // We need to wrap what we return in a Groovy closure, or else it's invoked
-//     // when this method is called, not when we pass it to parallel.
-//     // To do this, you need to wrap the code below in { }, and either return
-//     // that explicitly, or use { -> } syntax.
-//     return {build jobName}
-// }
+// Take the string and echo it.
+def transformIntoStep(String jobName) {
+    // We need to wrap what we return in a Groovy closure, or else it's invoked
+    // when this method is called, not when we pass it to parallel.
+    // To do this, you need to wrap the code below in { }, and either return
+    // that explicitly, or use { -> } syntax.
+    return {build jobName}
+}
 
 // def transformIntoStep = {String jobName -> build jobName}
