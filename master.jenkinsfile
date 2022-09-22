@@ -1,4 +1,13 @@
+import java.lang.Math;   
 def jobs = ['git_example',
+            'git_pipeline_example',
+            'git_pipeline_example',
+            'git_pipeline_example',
+            'git_pipeline_example',
+            'git_pipeline_example',
+            'git_pipeline_example',
+            'git_pipeline_example',
+            'git_pipeline_example',
             'git_pipeline_example',
             'database_table_writeCSV_V20'
             ]
@@ -6,7 +15,7 @@ def jobs = ['git_example',
 // The map we'll store the parallel steps in before executing them.
 LinkedHashMap stepsForParallel = jobs.collectEntries { jobName ->
     jobName += '_SEEDJOB'
-    ["echoing ${jobName}" : transformIntoStep(jobName)]
+    [("echoing ${jobName}" + Math.random()) : jobName]
 }
 
 node('built-in'){
