@@ -13,7 +13,7 @@ def dslDefinition(String test, Closure closure) {
             println delegate
             println "####################"
             cps {
-                script(readFileFromWorkspace('git_example.seedjob'))
+                script(readFileFromWorkspace('advent-jenkins-conf/git_example.seedjob'))
                 sandbox()
             }
 
