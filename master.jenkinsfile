@@ -66,13 +66,13 @@ node('built-in'){
         additionalClasspath: 'shared-lib/src'
     }
 
-    // stage('Auth generated seedjobs'){
-    //     for(job in jobs){
-    //         jobName = job + "_SEEDJOB"
-    //         jobConfigPath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
-    //         sh "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth @/var/jenkins_home/admin_auth update-job ${jobName} < ${jobConfigPath}"
-    //     }
-    // }
+    stage('Auth generated seedjobs'){
+        for(job in jobs){
+            jobName = job + "_SEEDJOB"
+            jobConfigPath = "/var/jenkins_home/jobs/" + jobName + "/config.xml"
+            sh "java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080 -auth @/var/jenkins_home/admin_auth update-job ${jobName} < ${jobConfigPath}"
+        }
+    }
 
     stage('Run generated seedjobs'){
         parallel stepsForParallel
