@@ -46,6 +46,9 @@ node('built-in'){
                 noTags: true, 
                 reference: '', 
                 shallow: true
+            [
+                $class: 'RelativeTargetDirectory',
+                relativeTargetDir: 'shared-lib'
             ]],
             submoduleCfg: [], 
             userRemoteConfigs: 
