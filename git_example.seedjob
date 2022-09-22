@@ -1,6 +1,6 @@
 jobName = 'git_example'
 
-node{
+node('slave'){
     stage('Checkout from source control'){
         checkout([$class: 'GitSCM', branches:
         [[name: 'refs/heads/master']],

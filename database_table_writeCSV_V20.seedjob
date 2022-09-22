@@ -1,6 +1,6 @@
 jobName = 'database_table_writeCSV_V20'
 
-node{
+node('slave'){
     stage('Checkout from source control'){
         checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', honorRefspec: true, noTags: true, reference: '', shallow: true]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github-cred', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'git@github.com:icanka/jenkins-conf.git']]])
         checkout([
